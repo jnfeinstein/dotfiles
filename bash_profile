@@ -19,3 +19,9 @@ function pop {
     git stash pop;
   fi
 }
+
+if [ -f ~/.git-completion.bash ]; then
+  . ~/.git-completion.bash
+elif [[ `command -v brew 2>&1` && -f `brew --prefix`/etc/bash_completion ]]; then
+  . `brew --prefix`/etc/bash_completion
+fi
