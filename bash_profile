@@ -1,3 +1,9 @@
+function command_exists() {
+  if [[ `command -v $1 2>&1` ]]; then
+    echo "$1"
+  fi
+}
+
 alias nbp="nano ~/.bash_profile"
 alias gg="git grep"
 alias gb="git branch"
@@ -22,6 +28,12 @@ function pop {
 
 if [ -f ~/.git-completion.bash ]; then
   . ~/.git-completion.bash
-elif [[ `command -v brew 2>&1` && -f `brew --prefix`/etc/bash_completion ]]; then
+elif [[ `command_exists brew` && -f `brew --prefix`/etc/bash_completion ]]; then
   . `brew --prefix`/etc/bash_completion
+fi
+
+if [[ `command_exists go` && -n $GOPATH ]]; then
+  eval `go env`
+  export PATH="$PATH:$GOPATH/bin"
+  alias gogo="cd $GOPATH/src"
 fi
