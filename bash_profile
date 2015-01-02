@@ -36,4 +36,13 @@ if [[ `command_exists go` && -n $GOPATH ]]; then
   eval `go env`
   export PATH="$PATH:$GOPATH/bin"
   alias gogo="cd $GOPATH/src"
+
+  function bgodoc() {
+    echo "Starting gdoc server at localhost:6060";
+    godoc -http=:6060;
+  }
+fi
+
+if [[ `command_exists postgres` ]]; then
+  alias bpostgres="postgres -D /usr/local/var/postgres";
 fi
