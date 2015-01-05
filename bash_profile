@@ -46,3 +46,19 @@ fi
 if [[ `command_exists postgres` ]]; then
   alias bpostgres="postgres -D /usr/local/var/postgres";
 fi
+
+if [[ `command_exists screen` ]]; then
+  function bscreen() {
+    if [[ $# -eq 0 ]]; then
+      echo "No arguments provided";
+      echo "Usage: bscreen <SESSION_NAME>";
+      return;
+    fi
+
+    if [ $(screen -list | grep $1 | wc -l) -gt "0" ]; then
+      screen -d -r $1;
+    else
+      screen -S $1 bash -l;
+    fi
+  }
+fi
