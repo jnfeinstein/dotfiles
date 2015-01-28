@@ -17,7 +17,7 @@ alias pick="git cherry-pick"
 alias show="git show"
 alias stash="git stash"
 
-function grb() { git rebase -i HEAD~$1; }
+function grb() { git rebase --preserve-merges -i HEAD~$1; }
 function pop {
   if [ $1 ]; then
     git stash pop stash@{$1};
