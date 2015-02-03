@@ -62,3 +62,16 @@ if [[ `command_exists screen` ]]; then
     fi
   }
 fi
+
+if [[ `command_exists mongo` ]]; then
+  function mongoc() {
+    if [ "$1" == "clean" ]; then
+      echo "Cleaning mongod lockfile";
+      rm /usr/local/var/mongodb/mongod.lock;
+    elif [ "$1" == "reload" ]; then
+      echo "Reloading mongod";
+      launchctl unload ~/Library/LaunchAgents/homebrew.mxcl.mongodb24.plist;
+      launchctl load ~/Library/LaunchAgents/homebrew.mxcl.mongodb24.plist;
+    fi
+  }
+fi
