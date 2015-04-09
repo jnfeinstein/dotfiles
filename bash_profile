@@ -16,8 +16,10 @@ alias ginc="git commit -am 'inc'"
 alias pick="git cherry-pick"
 alias show="git show"
 alias stash="git stash"
+alias reset="git reset HEAD~1"
+alias pull="git pull"
 
-function grb() { git rebase --preserve-merges -i HEAD~$1; }
+function grb() { git rebase -i HEAD~$1; }
 function pop {
   if [ $1 ]; then
     git stash pop stash@{$1};
@@ -72,6 +74,23 @@ if [[ `command_exists mongo` ]]; then
       echo "Reloading mongod";
       launchctl unload ~/Library/LaunchAgents/homebrew.mxcl.mongodb24.plist;
       launchctl load ~/Library/LaunchAgents/homebrew.mxcl.mongodb24.plist;
+    fi
+  }
+fi
+
+if [[ `command_exists redis-server` ]]; then
+  alias redis="redis-server";
+fi
+
+if [[ `command_exists boot2docker` ]]; then
+  function dockit() {
+    if [ "$1" == "stop" ]; then
+      boot2docker stop;
+    elif [ "$1" == "rm" ]; then
+      docker rm $(docker ps -a -q);
+    else
+      boot2docker start;
+      $(boot2docker shellinit);
     fi
   }
 fi
