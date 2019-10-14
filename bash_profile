@@ -17,7 +17,7 @@ alias pick="git cherry-pick"
 alias show="git show"
 alias stash="git stash"
 alias reset="git reset HEAD~1"
-alias pull="git pull"
+alias pull="git pull --rebase"
 
 function grb() { git rebase -i HEAD~$1; }
 function pop {
