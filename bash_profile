@@ -15,7 +15,7 @@ alias amend="git commit --amend"
 alias ginc="git commit -am 'inc'"
 alias pick="git cherry-pick"
 alias show="git show"
-alias stash="git stash"
+alias stash="git stash -u"
 alias reset="git reset HEAD~1"
 alias pull="git pull --rebase"
 
